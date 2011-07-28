@@ -20,7 +20,7 @@ static NSArray *query;
 + (void)initialize{
     
     query = [[NSArray arrayWithObjects:
-              @"where date(due_date) > date('now') and finished == 0",
+              @"where finished == 0",
               @"where  date('now') > date(due_date) and date(due_date)  < date('now','+1 day') and finished == 0",
               @"where date(due_date) < date('now') and finished == 0",
               @"where finished == 1", 
@@ -32,6 +32,7 @@ static NSArray *query;
 	if (self != nil) {
 		self.name = _name;
 		tags = [[NSMutableArray alloc] init];
+        self.dueDate = [NSDate date];
 	}
 	return self;
 }

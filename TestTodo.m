@@ -84,7 +84,7 @@
 	assert_equal(3, [[Tag allObjects] count]);
 	
 }
--(void) xtest_date_related{
+-(void) test_date_related{
 	Todo *todo = [[Todo alloc] initWithName:@"due tomorrow"];
 	todo.dueDate = [[NSDate date]nDaysAfter:1];
 	log_info(@"now %@",[NSDate date]);
@@ -106,9 +106,9 @@
 	arr = [Todo findByCriteria:@"where  date('now') > date(due_date) and date(due_date)  < date('now','+1 day')"];
 	assert_equal(1,[arr count]);
 }
--(void) xtest_date_with_array {
+-(void) test_date_with_array {
     NSArray *query = [NSArray arrayWithObjects:
-                      @"where date(due_date) > date('now') and finished == 0",
+                      @"where finished == 0",
                       @"where  date('now') > date(due_date) and date(due_date)  < date('now','+1 day') and finished == 0",
                       @"where date(due_date) < date('now') and finished == 0",
                       @"where finished == 1", 
@@ -129,7 +129,7 @@
 	[todo save];
 
 	NSArray *arr = [Todo findByCriteria:[query objectAtIndex:0]];
-	assert_equal(1,[arr count]);
+	assert_equal(3,[arr count]);
 
 	arr = [Todo findByCriteria:[query objectAtIndex:1]];
 	assert_equal(1,[arr count]);
